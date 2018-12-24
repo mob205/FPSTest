@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour {
 
-    [Header("Bullet")]
+    [Header("General")]
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawn;
+    [SerializeField] ParticleSystem gunFire;
+
+    [Header("Gun Stats")]
     [SerializeField] float bulletSpeed = 10f;
     
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -21,10 +24,21 @@ public class GunController : MonoBehaviour {
 	}
     void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            Debug.Log(bulletSpawn.position.x + ", " +  bulletSpawn.position.y + ", " + bulletSpawn.position.z);
-            var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            ShootBullet();
+            FireParticles();
         }
+    }
+
+    private void ShootBullet()
+    {
+        Debug.Log(bulletSpawn.position.x + ", " + bulletSpawn.position.y + ", " + bulletSpawn.position.z);
+        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
+    }
+    private void FireParticles()
+    {
+        gunFire.Play();
     }
 }
