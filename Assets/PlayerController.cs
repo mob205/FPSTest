@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 
     GunController gun;
     Camera playerCamera;
-    bool canJump = true;
+    bool isGrounded;
     Rigidbody rb;
 	// Use this for initialization
 	void Start () {
@@ -33,10 +33,6 @@ public class PlayerController : MonoBehaviour {
     void ProcessForce()
     {
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        if(rb.velocity.y == 0)
-        {
-            canJump = true;
-        }
     }
     void ProcessFire()
     {
@@ -47,12 +43,12 @@ public class PlayerController : MonoBehaviour {
     }
     void Jump()
     {
-        if (!canJump) { return; }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             Debug.Log("Space pressed");
-            rb.AddForce(transform.up * jumpHeight);
-            canJump = false;
+            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+           //transform.position += (transform.up * jumpHeight);
+            isGrounded = false;
         }
     }
     void ProcessMovement()
@@ -78,12 +74,8 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = rot;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Debug.Log(collision.collider.tag);
-    //    if (collision.collider.gameObject.CompareTag("Ground"))
-    //    {
-    //        canJump = true;
-    //    }
-    //}
+    private void OnCollisionStay()
+    {
+        isGrounded = true;
+    }
 }

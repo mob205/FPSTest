@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour {
         rotY += mouseX * mouseSensitivity * Time.deltaTime;
         rotX += mouseY * mouseSensitivity * Time.deltaTime;
 
-       rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
