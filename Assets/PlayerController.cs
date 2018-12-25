@@ -24,10 +24,15 @@ public class PlayerController : MonoBehaviour {
         ProcessFire();
         ProcessMovement();
         ResetRotation();
+        SuppressForce();
     }
     private void FixedUpdate()
     {
         Jump();
+    }
+    void SuppressForce()
+    {
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
     }
     void ProcessFire()
     {
