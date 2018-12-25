@@ -24,15 +24,19 @@ public class PlayerController : MonoBehaviour {
         ProcessFire();
         ProcessMovement();
         ResetRotation();
-        SuppressForce();
+        ProcessForce();
     }
     private void FixedUpdate()
     {
         Jump();
     }
-    void SuppressForce()
+    void ProcessForce()
     {
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        if(rb.velocity.y == 0)
+        {
+            canJump = true;
+        }
     }
     void ProcessFire()
     {
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         if (!canJump) { return; }
         if (Input.GetKey(KeyCode.Space))
         {
+            Debug.Log("Space pressed");
             rb.AddForce(transform.up * jumpHeight);
             canJump = false;
         }
@@ -73,11 +78,12 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = rot;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Ground"))
-        {
-            canJump = true;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log(collision.collider.tag);
+    //    if (collision.collider.gameObject.CompareTag("Ground"))
+    //    {
+    //        canJump = true;
+    //    }
+    //}
 }
