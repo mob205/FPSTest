@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Cursor.visible = false;
-        Vector3 rot = transform.localRotation.eulerAngles;
+        Vector3 rot = transform.rotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
 	}

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    [SerializeField] float speed = 10;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float jumpHeight = 10f;
 
     GunController gun;
     Camera playerCamera;
+    bool canJump = true;
+    Rigidbody rb;
 	// Use this for initialization
 	void Start () {
         gun = GetComponentInChildren<GunController>();
         playerCamera = FindObjectOfType<Camera>();
+        rb = GetComponent<Rigidbody>();
 	}
-
+ 
     // Update is called once per frame
     void Update()
     {
@@ -21,11 +25,24 @@ public class PlayerController : MonoBehaviour {
         ProcessMovement();
         ResetRotation();
     }
+    private void FixedUpdate()
+    {
+        Jump();
+    }
     void ProcessFire()
     {
         if (Input.GetMouseButton(0))
         {
             gun.Fire();
+        }
+    }
+    void Jump()
+    {
+        if (!canJump) { return; }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(transform.up * jumpHeight);
+            canJump = false;
         }
     }
     void ProcessMovement()
@@ -35,10 +52,10 @@ public class PlayerController : MonoBehaviour {
         { 
             mSpeed = mSpeed * 2;
         }
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Debug.Log(mSpeed);
 
         transform.position += (transform.forward * vertical * mSpeed * Time.deltaTime);
         transform.position += (transform.right * horizontal * mSpeed * Time.deltaTime);
@@ -49,5 +66,13 @@ public class PlayerController : MonoBehaviour {
         Quaternion rot = transform.rotation;
         rot = Quaternion.Euler(0, cameraRotation.eulerAngles.y, cameraRotation.eulerAngles.z);
         transform.rotation = rot;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Ground"))
+        {
+            canJump = true;
+        }
     }
 }
