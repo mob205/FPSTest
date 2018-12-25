@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] float speed = 10f;
     [SerializeField] float jumpHeight = 10f;
+    [SerializeField] Transform ADSLocation;
+    [SerializeField] Transform hipLocation;
 
     GunController gun;
     Camera playerCamera;
@@ -16,6 +18,7 @@ public class PlayerController : MonoBehaviour {
         gun = GetComponentInChildren<GunController>();
         playerCamera = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody>();
+        
 	}
  
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         ProcessMovement();
         ResetRotation();
         ProcessForce();
+        AimDownSights();
     }
     private void FixedUpdate()
     {
@@ -39,6 +43,19 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             gun.Fire();
+        }
+    }
+    void AimDownSights()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            gun.transform.position = ADSLocation.transform.position;
+            gun.transform.rotation = ADSLocation.transform.rotation;
+        }
+        else
+        {
+            gun.transform.position = hipLocation.transform.position;
+            gun.transform.rotation = hipLocation.transform.rotation;
         }
     }
     void Jump()
