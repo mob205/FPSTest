@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour {
     [SerializeField] Transform bulletSpawn;
     [SerializeField] ParticleSystem gunFire;
     [SerializeField] AudioSource gunAudio;
+    [SerializeField] GameObject shooter;
 
     [Header("Gun Stats")]
     [SerializeField] float bulletSpeed = 10f;
@@ -47,17 +48,16 @@ public class GunController : MonoBehaviour {
     }
     private void ShootRay()
     {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;
-        Debug.Log(transform.position);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity)) {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Debug.Log("Hit something");
             Destroy(hit.collider.gameObject);
         }
         else
         {
             Debug.Log("Did not hit something");
-            Debug.DrawRay(transform.position, transform.forward * 200, Color.white, 200);
+            Debug.DrawRay(shooter.transform.position, transform.forward * 200, Color.white, 200);
         }
     }
     private void ShootBullet()

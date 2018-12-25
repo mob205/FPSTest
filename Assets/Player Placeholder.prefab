@@ -478,6 +478,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4516283272562314}
   gunFire: {fileID: 198875118718764924}
   gunAudio: {fileID: 82682703339736690}
+  shooter: {fileID: 1683826588129482}
   bulletSpeed: 300
   timeBetweenFire: 0.1
   bulletLifetime: 5
