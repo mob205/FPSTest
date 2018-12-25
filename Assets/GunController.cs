@@ -25,20 +25,16 @@ public class GunController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Fire();
     }
 
-    void Fire()
+    public void Fire()
     {
         if(!canFire) { return; }
-        if (Input.GetMouseButton(0))
-        {
-            ShootRay();
-            ShootBullet();
-            FireParticles();
-            PlayShootSound();
-            ToggleFire();
-        }
+        ShootRay();
+        ShootBullet();
+        FireParticles();
+        PlayShootSound();
+        ToggleFire();
     }
     private void ToggleFire()
     {
