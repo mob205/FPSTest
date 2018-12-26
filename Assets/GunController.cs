@@ -15,26 +15,38 @@ public class GunController : MonoBehaviour {
     [Header("Gun Stats")]
     [SerializeField] float timeBetweenFire = 0.5f;
     [SerializeField] public float aimDeviation = 0.5F;
-        
+    [SerializeField] int magSize = 30;
+    [SerializeField] float reloadTime;
+
+
 
     bool canFire = true;
+    private int _ammoCount;
+    bool hasFiredSinceReload = false;
 
 	// Use this for initialization
 	void Start () {
-        
+        _ammoCount = magSize;
 	}
 	
 	// Update is called once per frame
 	void Update () {
     }
-
+    public int GetAmmoCount()
+    {
+        return _ammoCount;
+    }
     public void Fire()
     {
         if(!canFire) { return; }
+        if (_ammoCount <= 0) { return; }
+        hasFiredSinceReload = true;
         ShootRay();
         FireParticles();
         PlayShootSound();
         ToggleFire();
+        ConsumeAmmo();
+        Debug.Log("Fired");
     }
     private void ToggleFire()
     {
@@ -52,18 +64,42 @@ public class GunController : MonoBehaviour {
         ray.direction = ray.direction + (new Vector3(UnityEngine.Random.Range(-aimDeviation, aimDeviation), UnityEngine.Random.Range(-aimDeviation, aimDeviation), 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-            Debug.Log("Hit something");
+            //Debug.Log("Hit something");
             //Destroy(hit.collider.gameObject);
         }
         else
         {
-            Debug.Log("Did not hit something");
+            //Debug.Log("Did not hit something");
             Debug.DrawRay(ray.origin, ray.direction * 200, Color.red, 200);
         }
     }
     private void FireParticles()
     {
         gunFire.Play();
+    }
+    private void ConsumeAmmo()
+    {
+        _ammoCount--;
+        if(_ammoCount <= 0)
+        {
+            StartCoroutine("Reload");
+        }
+    }
+    public IEnumerator Reload()
+    {
+        Debug.Log("Reloading");
+        hasFiredSinceReload = false;
+        yield return new WaitForSeconds(reloadTime);
+        Debug.Log(hasFiredSinceReload);
+        if (!hasFiredSinceReload)
+        {
+            _ammoCount = magSize;
+            Debug.Log("Reload successful.");
+        }
+        else
+        {
+            Debug.Log("Reload not successful.");
+        }
     }
     IEnumerator EnableFire()
     {

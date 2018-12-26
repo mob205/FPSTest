@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
     [SerializeField] float hipAimDeviation = 0.1f;
+    [SerializeField] Text ammoDisplay;
 
     GunController gun;
     Camera playerCamera;
@@ -24,25 +26,34 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        ProcessFire();
+        ProcessGunInput();
         ProcessMovement();
         ResetRotation();
         ProcessForce();
         AimDownSights();
+        UpdateAmmoDisplay();
     }
     private void FixedUpdate()
     {
         Jump();
     }
+    private void UpdateAmmoDisplay()
+    {
+        ammoDisplay.text = gun.GetAmmoCount().ToString();
+    }
     void ProcessForce()
     {
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
     }
-    void ProcessFire()
+    void ProcessGunInput()
     {
         if (Input.GetMouseButton(0))
         {
             gun.Fire();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gun.StartCoroutine("Reload");
         }
     }
     void AimDownSights()
