@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GunController : MonoBehaviour {
 
     [Header("General")]
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform bulletSpawn;
     [SerializeField] ParticleSystem gunFire;
     [SerializeField] AudioSource gunAudio;
     [SerializeField] GameObject shooter;
+    [SerializeField] Transform rayTransform;
 
     [Header("Gun Stats")]
-    [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float timeBetweenFire = 0.5f;
-    [SerializeField] float bulletLifetime = 5f;
+    [SerializeField] public float aimDeviation = 0.5F;
+        
 
     bool canFire = true;
 
@@ -32,7 +32,6 @@ public class GunController : MonoBehaviour {
     {
         if(!canFire) { return; }
         ShootRay();
-        ShootBullet();
         FireParticles();
         PlayShootSound();
         ToggleFire();
@@ -48,23 +47,19 @@ public class GunController : MonoBehaviour {
     }
     private void ShootRay()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Ray ray = new Ray(rayTransform.position, rayTransform.forward);
+        
+        ray.direction = ray.direction + (new Vector3(UnityEngine.Random.Range(-aimDeviation, aimDeviation), UnityEngine.Random.Range(-aimDeviation, aimDeviation), 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Debug.Log("Hit something");
-            Destroy(hit.collider.gameObject);
+            //Destroy(hit.collider.gameObject);
         }
         else
         {
             Debug.Log("Did not hit something");
-            Debug.DrawRay(shooter.transform.position, transform.forward * 200, Color.white, 200);
+            Debug.DrawRay(ray.origin, ray.direction * 200, Color.red, 200);
         }
-    }
-    private void ShootBullet()
-    {
-        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
-        Destroy(bullet, bulletLifetime);
     }
     private void FireParticles()
     {

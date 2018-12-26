@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
+    [SerializeField] float hipAimDeviation = 0.1f;
 
     GunController gun;
     Camera playerCamera;
@@ -18,7 +19,6 @@ public class PlayerController : MonoBehaviour {
         gun = GetComponentInChildren<GunController>();
         playerCamera = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody>();
-        
 	}
  
     // Update is called once per frame
@@ -51,11 +51,13 @@ public class PlayerController : MonoBehaviour {
         {
             gun.transform.position = ADSLocation.transform.position;
             gun.transform.rotation = ADSLocation.transform.rotation;
+            gun.aimDeviation = 0f;
         }
         else
         {
             gun.transform.position = hipLocation.transform.position;
             gun.transform.rotation = hipLocation.transform.rotation;
+            gun.aimDeviation = hipAimDeviation;
         }
     }
     void Jump()
