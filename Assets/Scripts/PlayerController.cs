@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
+using TMPro;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField] float speed = 10f;
@@ -10,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
     [SerializeField] float hipAimDeviation = 0.1f;
-    [SerializeField] Text ammoDisplay;
+    [SerializeField] TextMeshProUGUI ammoDisplay;
 
     GunController gun;
     Camera playerCamera;
@@ -39,7 +38,10 @@ public class PlayerController : MonoBehaviour {
     }
     private void UpdateAmmoDisplay()
     {
-        ammoDisplay.text = gun.GetAmmoCount().ToString();
+        ammoDisplay.text = gun.GetAmmoCount().ToString() + " / " + gun.magSize;
+        if(gun.CheckReloadStatus()) {
+            ammoDisplay.text += " Reloading...";
+        }
     }
     void ProcessForce()
     {

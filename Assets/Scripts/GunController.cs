@@ -15,11 +15,11 @@ public class GunController : MonoBehaviour {
     [Header("Gun Stats")]
     [SerializeField] float timeBetweenFire = 0.5f;
     [SerializeField] public float aimDeviation = 0.5F;
-    [SerializeField] int magSize = 30;
+    [SerializeField] public int magSize = 30;
     [SerializeField] float reloadTime;
 
 
-
+    bool isReloading;
     bool canFire = true;
     private int _ammoCount;
     bool hasFiredSinceReload = false;
@@ -73,6 +73,10 @@ public class GunController : MonoBehaviour {
             Debug.DrawRay(ray.origin, ray.direction * 200, Color.red, 200);
         }
     }
+    public bool CheckReloadStatus()
+    {
+        return isReloading;
+    }
     private void FireParticles()
     {
         gunFire.Play();
@@ -89,6 +93,7 @@ public class GunController : MonoBehaviour {
     {
         Debug.Log("Reloading");
         hasFiredSinceReload = false;
+        isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         Debug.Log(hasFiredSinceReload);
         if (!hasFiredSinceReload)
@@ -100,6 +105,7 @@ public class GunController : MonoBehaviour {
         {
             Debug.Log("Reload not successful.");
         }
+        isReloading = false;
     }
     IEnumerator EnableFire()
     {
