@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour {
         AimDownSights();
         UpdateAmmoDisplay();
     }
+    private void LateUpdate()
+    {
+        playerCamera.transform.localRotation = Quaternion.Euler(playerCamera.transform.eulerAngles.x, 0, 0);
+    }
     private void FixedUpdate()
     {
         Jump();
@@ -102,7 +106,7 @@ public class PlayerController : MonoBehaviour {
     {
         Quaternion cameraRotation = playerCamera.gameObject.transform.rotation;
         Quaternion rot = transform.rotation;
-        rot = Quaternion.Euler(0, cameraRotation.eulerAngles.y, cameraRotation.eulerAngles.z);
+        rot = Quaternion.Euler(0, cameraRotation.eulerAngles.y, 0);
         transform.rotation = rot;
     }
 
