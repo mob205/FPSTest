@@ -46,7 +46,6 @@ public class GunController : MonoBehaviour {
         PlayShootSound();
         ToggleFire();
         ConsumeAmmo();
-        Debug.Log("Fired");
     }
     private void ToggleFire()
     {
@@ -64,12 +63,12 @@ public class GunController : MonoBehaviour {
         ray.direction = ray.direction + (new Vector3(UnityEngine.Random.Range(-aimDeviation, aimDeviation), UnityEngine.Random.Range(-aimDeviation, aimDeviation), 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-            //Debug.Log("Hit something");
-            //Destroy(hit.collider.gameObject);
+            Debug.Log("Hit something");
+            Destroy(hit.collider.gameObject);
         }
         else
         {
-            //Debug.Log("Did not hit something");
+            Debug.Log("Did not hit something");
             Debug.DrawRay(ray.origin, ray.direction * 200, Color.red, 200);
         }
     }

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 222297897087778162}
   - component: {fileID: 114891848661722980}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: Ammo Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   jumpHeight: 7
   ADSLocation: {fileID: 4844384236982132}
   hipLocation: {fileID: 4165767317599418}
-  hipAimDeviation: 1.3
+  hipAimDeviation: 0.5
   ammoDisplay: {fileID: 114891848661722980}
 --- !u!114 &114385455963577584
 MonoBehaviour:
