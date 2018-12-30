@@ -26,19 +26,14 @@ public class PlayerController : MonoBehaviour {
     void Update()
     {
         ProcessGunInput();
-        ProcessMovement();
         ResetRotation();
-        ProcessForce();
         AimDownSights();
         UpdateAmmoDisplay();
-    }
-    private void LateUpdate()
-    {
-        playerCamera.transform.localRotation = Quaternion.Euler(playerCamera.transform.eulerAngles.x, 0, 0);
     }
     private void FixedUpdate()
     {
         Jump();
+        ProcessMovement();
     }
     private void UpdateAmmoDisplay()
     {
@@ -46,10 +41,6 @@ public class PlayerController : MonoBehaviour {
         if(gun.CheckReloadStatus()) {
             ammoDisplay.text += " Reloading...";
         }
-    }
-    void ProcessForce()
-    {
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
     }
     void ProcessGunInput()
     {
