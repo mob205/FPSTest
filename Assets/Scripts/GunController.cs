@@ -9,7 +9,6 @@ public class GunController : MonoBehaviour {
     [Header("General")]
     [SerializeField] ParticleSystem gunFire;
     [SerializeField] AudioSource gunAudio;
-    [SerializeField] GameObject shooter;
     [SerializeField] Transform rayTransform;
 
     [Header("Gun Stats")]
@@ -94,7 +93,6 @@ public class GunController : MonoBehaviour {
         hasFiredSinceReload = false;
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        Debug.Log(hasFiredSinceReload);
         if (!hasFiredSinceReload)
         {
             _ammoCount = magSize;
