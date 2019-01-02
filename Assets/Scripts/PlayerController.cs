@@ -4,13 +4,18 @@ using UnityEngine;
 using TMPro;
 public class PlayerController : MonoBehaviour {
 
-    [SerializeField] float speed = 10f;
-    [SerializeField] float jumpHeight = 10f;
+    [Header("General")]
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
-    [SerializeField] float hipAimDeviation = 0.1f;
     [SerializeField] TextMeshProUGUI ammoDisplay;
+    [SerializeField] TextMeshProUGUI healthDisplay;
+    [Header("Stats")]
+    [SerializeField] int maxHealth = 100;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float jumpHeight = 10f;
+    [SerializeField] float hipAimDeviation = 0.1f;
 
+    int health;
     GunController gun;
     Camera playerCamera;
     bool isGrounded;
@@ -20,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         gun = GetComponentInChildren<GunController>();
         playerCamera = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody>();
+        health = maxHealth;
 	}
  
     // Update is called once per frame
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         ResetRotation();
         AimDownSights();
         UpdateAmmoDisplay();
+        UpdateHealthDisplay();
     }
     private void FixedUpdate()
     {
@@ -42,6 +49,10 @@ public class PlayerController : MonoBehaviour {
         if(gun.CheckReloadStatus()) {
             ammoDisplay.text += " Reloading...";
         }
+    }
+    private void UpdateHealthDisplay()
+    {
+        healthDisplay.text = health + " / " + maxHealth; ;
     }
     void ProcessGunInput()
     {
@@ -108,4 +119,14 @@ public class PlayerController : MonoBehaviour {
     {
         isGrounded = true;
     }
+
+    public void ProcessRayHit(int damage)
+    {
+        Damage(damage);
+    }
+    void Damage(int damage)
+    {
+        health -= damage;
+    }
+    
 }

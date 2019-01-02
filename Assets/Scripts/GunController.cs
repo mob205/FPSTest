@@ -16,6 +16,7 @@ public class GunController : MonoBehaviour {
     [SerializeField] public float aimDeviation = 0.5F;
     [SerializeField] public int magSize = 30;
     [SerializeField] float reloadTime;
+    [SerializeField] int damage = 5;
 
 
     bool isReloading;
@@ -61,14 +62,13 @@ public class GunController : MonoBehaviour {
         
         ray.direction = ray.direction + (new Vector3(UnityEngine.Random.Range(-aimDeviation, aimDeviation), UnityEngine.Random.Range(-aimDeviation, aimDeviation), 0));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-            Debug.Log("Hit something");
-            //Destroy(hit.collider.gameObject);
-        }
-        else
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.Log("Did not hit something");
-            Debug.DrawRay(ray.origin, ray.direction * 200, Color.red, 200);
+            GameObject collisionGO = hit.collider.gameObject;
+            if (collisionGO.GetComponent<RayDetector>())
+            {
+                collisionGO.GetComponent<RayDetector>().DetectRayHit(damage);
+            }
         }
     }
     public bool CheckReloadStatus()

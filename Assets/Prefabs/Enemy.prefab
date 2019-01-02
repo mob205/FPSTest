@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23976006966682650}
   - component: {fileID: 114418554604549616}
   - component: {fileID: 195261441166872672}
+  - component: {fileID: 114383869389875868}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -147,7 +148,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1521989362849608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.105, z: 0.579}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4059420085425402}
@@ -289,7 +290,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a339ba3bb4f53014299a194da13f88a0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.51
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -373,9 +374,21 @@ MonoBehaviour:
   gunAudio: {fileID: 82404235887532192}
   rayTransform: {fileID: 4199573631828540}
   timeBetweenFire: 0.1
-  aimDeviation: 0
+  aimDeviation: 0.1
   magSize: 30
   reloadTime: 1
+  damage: 5
+--- !u!114 &114383869389875868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1205153988513346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852cf7191369c344b0f7df97caa08dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114418554604549616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e736e085cc238024fb0ee5ec0a8f2322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   rayTransform: {fileID: 4199573631828540}
   fireRange: 50
 --- !u!136 &136098331137546542
