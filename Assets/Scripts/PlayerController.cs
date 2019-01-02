@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     {
         Jump();
         ProcessMovement();
+        LimitVelocity();
     }
     private void UpdateAmmoDisplay()
     {
@@ -68,13 +69,16 @@ public class PlayerController : MonoBehaviour {
             gun.aimDeviation = hipAimDeviation;
         }
     }
+    void LimitVelocity()
+    {
+        rb.velocity = new Vector3(0, Mathf.Clamp(rb.velocity.y, -15, jumpHeight * 2), 0);
+    }
     void Jump()
     {
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             Debug.Log("Space pressed");
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
-           //transform.position += (transform.up * jumpHeight);
             isGrounded = false;
         }
     }
@@ -88,7 +92,6 @@ public class PlayerController : MonoBehaviour {
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
 
         transform.position += (transform.forward * vertical * mSpeed * Time.deltaTime);
         transform.position += (transform.right * horizontal * mSpeed * Time.deltaTime);

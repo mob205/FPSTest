@@ -64,7 +64,7 @@ public class GunController : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Debug.Log("Hit something");
-            Destroy(hit.collider.gameObject);
+            //Destroy(hit.collider.gameObject);
         }
         else
         {
