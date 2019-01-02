@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 public class PlayerController : MonoBehaviour {
+
 
     [Header("General")]
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
     [SerializeField] TextMeshProUGUI ammoDisplay;
-    [SerializeField] TextMeshProUGUI healthDisplay;
+    [SerializeField] Slider healthDisplay;
     [Header("Stats")]
     [SerializeField] int maxHealth = 100;
     [SerializeField] float speed = 10f;
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void UpdateHealthDisplay()
     {
-        healthDisplay.text = health + " / " + maxHealth; ;
+        healthDisplay.value = (float)health / (float)maxHealth;
     }
     void ProcessGunInput()
     {

@@ -400,8 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e736e085cc238024fb0ee5ec0a8f2322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
   rayTransform: {fileID: 4199573631828540}
+  maxHealth: 25
   fireRange: 50
 --- !u!136 &136098331137546542
 CapsuleCollider:
