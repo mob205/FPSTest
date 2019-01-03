@@ -11,16 +11,23 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Transform hipLocation;
     [SerializeField] TextMeshProUGUI ammoDisplay;
     [SerializeField] Slider healthDisplay;
+    [SerializeField] Slider staminaDisplay;
     [Header("Stats")]
+    [SerializeField] int maxStamina = 100;
     [SerializeField] int maxHealth = 100;
+    [SerializeField] int staminaUsage = 25;
+    [SerializeField] int staminaRegen = 15;
     [SerializeField] float speed = 10f;
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] float hipAimDeviation = 0.1f;
+    [SerializeField] float sprintSpeedMultiplier = 2f;
 
+    float stamina;
     int health;
     GunController gun;
     Camera playerCamera;
     bool isGrounded;
+    bool isSprinting;
     Rigidbody rb;
 	// Use this for initialization
 	void Start () {
@@ -28,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         playerCamera = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        stamina = maxStamina;
 	}
  
     // Update is called once per frame
@@ -38,6 +46,8 @@ public class PlayerController : MonoBehaviour {
         AimDownSights();
         UpdateAmmoDisplay();
         UpdateHealthDisplay();
+        UpdateStaminaDisplay();
+        ProcessSprint();
     }
     private void FixedUpdate()
     {
@@ -56,6 +66,10 @@ public class PlayerController : MonoBehaviour {
     {
         healthDisplay.value = (float)health / (float)maxHealth;
     }
+    private void UpdateStaminaDisplay()
+    {
+        staminaDisplay.value = stamina / (float)maxStamina;
+    }
     void ProcessGunInput()
     {
         if (Input.GetMouseButton(0))
@@ -66,6 +80,24 @@ public class PlayerController : MonoBehaviour {
         {
             gun.StartCoroutine("Reload");
         }
+    }
+    void Damage(int damage)
+    {
+        health -= damage;
+    }
+    void ProcessSprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        {
+            isSprinting = true;
+            stamina -= staminaUsage * Time.deltaTime;
+        }
+        else
+        {
+            isSprinting = false;
+            stamina += staminaRegen * Time.deltaTime;
+        }
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
     }
     void AimDownSights()
     {
@@ -82,32 +114,38 @@ public class PlayerController : MonoBehaviour {
             gun.aimDeviation = hipAimDeviation;
         }
     }
+
     void LimitVelocity()
     {
         rb.velocity = new Vector3(0, Mathf.Clamp(rb.velocity.y, -15, jumpHeight * 2), 0);
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && stamina > staminaUsage)
         {
-            Debug.Log("Space pressed");
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
             isGrounded = false;
+            stamina -= staminaUsage / 2;
+            Debug.Log("Jumped");
         }
     }
     void ProcessMovement()
     {
         float mSpeed = speed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (isSprinting)
         { 
-            mSpeed = mSpeed * 2;
+            mSpeed = mSpeed * sprintSpeedMultiplier;
         }
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        transform.position += (transform.forward * vertical * mSpeed * Time.deltaTime);
-        transform.position += (transform.right * horizontal * mSpeed * Time.deltaTime);
+        Vector3 movement = new Vector3(0, 0, 0);
+        movement += transform.forward * vertical;
+        movement += transform.right * horizontal;
+        movement.Normalize();
+        transform.position += movement * mSpeed * Time.deltaTime;
+        
     }
     void ResetRotation()
     {
@@ -126,9 +164,6 @@ public class PlayerController : MonoBehaviour {
     {
         Damage(damage);
     }
-    void Damage(int damage)
-    {
-        health -= damage;
-    }
+   
     
 }
