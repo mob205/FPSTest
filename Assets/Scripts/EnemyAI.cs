@@ -14,7 +14,8 @@ public class EnemyAI : MonoBehaviour {
     private GunController _gun;
     private NavMeshAgent _agent;    
     private PlayerController _player;
-    
+
+    bool isAggroed;
 	// Use this for initialization
 	void Start () {
         _player = FindObjectOfType<PlayerController>();
@@ -24,13 +25,19 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        MoveToPlayer();
-        DecideShoot();
+	void Update ()
+    {
+        if (isAggroed)
+        {
+            MoveToPlayer();
+            DecideShoot();
+        }
+
+        
 	}
     void DecideShoot()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(rayTransform.position, rayTransform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fireRange))
         {
@@ -52,6 +59,7 @@ public class EnemyAI : MonoBehaviour {
     }
     void Damage(int damage)
     {
+        isAggroed = true;
         _health -= damage;
         if(_health <= 0)
         {
@@ -61,5 +69,10 @@ public class EnemyAI : MonoBehaviour {
     void InitiateDeathSequence()
     {
         Destroy(gameObject);
+    }
+    public void Aggro()
+    {
+        Debug.Log("player detectedx");
+        isAggroed = true;
     }
 }

@@ -28,5 +28,6 @@ public class HealthPowerup : MonoBehaviour {
     void Heal()
     {
         _player.Heal(healAmount);
+        Destroy(gameObject);
     }
 }

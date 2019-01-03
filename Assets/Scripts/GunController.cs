@@ -59,10 +59,10 @@ public class GunController : MonoBehaviour {
     private void ShootRay()
     {
         Ray ray = new Ray(rayTransform.position, rayTransform.forward);
-        
+        LayerMask mask = LayerMask.GetMask("AI Range");
         ray.direction = ray.direction + (new Vector3(UnityEngine.Random.Range(-aimDeviation, aimDeviation), UnityEngine.Random.Range(-aimDeviation, aimDeviation), 0));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~mask)) 
         {
             GameObject collisionGO = hit.collider.gameObject;
             if (collisionGO.GetComponent<RayDetector>())
