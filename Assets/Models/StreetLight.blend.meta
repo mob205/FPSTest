@@ -1,32 +1,17 @@
 fileFormatVersion: 2
-guid: fa701792c6fd473449a9a2c62097b717
-timeCreated: 1546277256
+guid: 7a76f5442fa469a4091af6ff3cbeb283
+timeCreated: 1546535378
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube
-    100004: Cube_001
     400000: //RootNode
-    400002: Cube
-    400004: Cube_001
-    2100000: unnamed
-    2100002: Color_1
-    2100004: Chalk_Board
-    2100006: Building_Color
-    2100008: Floor
-    2100010: Counter
-    2100012: Gray
-    2100014: Window_Light
+    2100000: Pole
+    2100002: Light
     2300000: //RootNode
-    2300002: Cube
-    2300004: Cube_001
     3300000: //RootNode
-    3300002: Cube
-    3300004: Cube_001
-    4300000: Cube
-    4300002: Cube_001
+    4300000: Street_Light
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
