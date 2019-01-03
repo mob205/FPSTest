@@ -46,22 +46,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1836079248965042
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4946787936472550}
-  - component: {fileID: 82018867010714958}
-  m_Layer: 0
-  m_Name: Gun Fire Noise 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1847483725174128
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +72,22 @@ GameObject:
   - component: {fileID: 114086933315148340}
   m_Layer: 0
   m_Name: Handgun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1959159731108364
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4833934549141584}
+  - component: {fileID: 82972888965092578}
+  m_Layer: 0
+  m_Name: Handgun Gun Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,18 +167,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4969021233118512}
-  - {fileID: 4946787936472550}
+  - {fileID: 4833934549141584}
   m_Father: {fileID: 4519853277693762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!4 &4946787936472550
+--- !u!4 &4833934549141584
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1836079248965042}
+  m_GameObject: {fileID: 1959159731108364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.16, y: -0.07999992, z: 0.5799999}
+  m_LocalPosition: {x: 12.036533, y: -0.8509252, z: 21.78366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4819274835379618}
@@ -280,18 +280,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1961677190027098}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &82018867010714958
+--- !u!82 &82972888965092578
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1836079248965042}
+  m_GameObject: {fileID: 1959159731108364}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a339ba3bb4f53014299a194da13f88a0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e1085c61429fa094ea917366f1be1531, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunFire: {fileID: 198444917202828716}
-  gunAudio: {fileID: 82018867010714958}
+  gunAudio: {fileID: 82972888965092578}
   rayTransform: {fileID: 4065273490381150}
   timeBetweenFire: 1.5
   aimDeviation: 0.05
