@@ -85,6 +85,10 @@ public class PlayerController : MonoBehaviour {
     {
         health -= damage;
     }
+    public void Heal(int heal)
+    {
+        health = Mathf.Clamp(health + heal, 0, maxHealth);
+    }
     void ProcessSprint()
     {
         if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
