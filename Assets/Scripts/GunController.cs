@@ -16,7 +16,7 @@ public class GunController : MonoBehaviour {
     [SerializeField] public float aimDeviation = 0.5F;
     [SerializeField] public int magSize = 30;
     [SerializeField] float reloadTime;
-    [SerializeField] int damage = 5;
+    [SerializeField] float damage = 5;
 
 
     bool isReloading;
@@ -46,6 +46,10 @@ public class GunController : MonoBehaviour {
         PlayShootSound();
         ToggleFire();
         ConsumeAmmo();
+    }
+    public void ModifyDamage(float damageModifier)
+    {
+        damage += damage * (damageModifier / 100);
     }
     private void ToggleFire()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RayDetector : MonoBehaviour {
 
-    public void DetectRayHit(int damage)
+    public void DetectRayHit(float damage)
     {
         SendMessage("ProcessRayHit", damage);
     }

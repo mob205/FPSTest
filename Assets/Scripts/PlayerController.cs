@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float sprintSpeedMultiplier = 2f;
 
     float stamina;
-    int health;
+    float health;
     GunController gun;
     Camera playerCamera;
     bool isGrounded;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void UpdateStaminaDisplay()
     {
-        staminaDisplay.value = stamina / (float)maxStamina;
+        staminaDisplay.value = (float)stamina / (float)maxStamina;
     }
     void ProcessGunInput()
     {
@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour {
 
     void LimitVelocity()
     {
+        //To fix glitch where player may be launched upward when colliding with low walls
         rb.velocity = new Vector3(0, Mathf.Clamp(rb.velocity.y, -15, jumpHeight * 2), 0);
     }
     void Jump()
@@ -130,13 +131,12 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
             isGrounded = false;
             stamina -= staminaUsage / 2;
-            Debug.Log("Jumped");
         }
     }
     void ProcessMovement()
     {
         float mSpeed = speed;
-        if (isSprinting)
+        if (isSprinting & stamina > 0) 
         { 
             mSpeed = mSpeed * sprintSpeedMultiplier;
         }

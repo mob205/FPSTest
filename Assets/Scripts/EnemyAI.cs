@@ -7,10 +7,10 @@ public class EnemyAI : MonoBehaviour {
     [Header("General")]
     [SerializeField] Transform rayTransform;
     [Header("Stats")]
-    [SerializeField] int maxHealth = 10;
+    [SerializeField] float maxHealth = 10;
     [SerializeField] float fireRange = 55f;
 
-    private int _health;
+    private float _health;
     private GunController _gun;
     private NavMeshAgent _agent;    
     private PlayerController _player;
@@ -59,6 +59,7 @@ public class EnemyAI : MonoBehaviour {
     }
     void Damage(int damage)
     {
+        Debug.Log("damaged. " + _health);
         isAggroed = true;
         _health -= damage;
         if(_health <= 0)
@@ -72,7 +73,6 @@ public class EnemyAI : MonoBehaviour {
     }
     public void Aggro()
     {
-        Debug.Log("player detectedx");
         isAggroed = true;
     }
 }
