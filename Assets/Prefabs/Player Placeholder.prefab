@@ -153,14 +153,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683826588129482}
-  m_LocalRotation: {x: -0, y: 0.9926986, z: -0, w: 0.12062147}
-  m_LocalPosition: {x: -2.61, y: 6.42, z: -66.34}
+  m_LocalRotation: {x: -0, y: -0.011633247, z: -0, w: -0.99993235}
+  m_LocalPosition: {x: -3.7, y: 6.42, z: 79.1}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4339799528760644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 166.14401, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 361.333, z: 0}
 --- !u!4 &4132289675597180
 Transform:
   m_ObjectHideFlags: 1
@@ -207,7 +207,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394556638183314}
-  m_LocalRotation: {x: 0.21043307, y: -0, z: -0.0000000018626449, w: 0.9776083}
+  m_LocalRotation: {x: 0.0048410925, y: 0.0000000074505797, z: 0.000000007392372,
+    w: 0.9999883}
   m_LocalPosition: {x: 0, y: 0.53, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
@@ -216,7 +217,7 @@ Transform:
   - {fileID: 4844384236982132}
   m_Father: {fileID: 4011073729043774}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 24.295002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.555, y: 0, z: 0}
 --- !u!4 &4613536638210590
 Transform:
   m_ObjectHideFlags: 1
@@ -501,7 +502,7 @@ MonoBehaviour:
   staminaRegen: 20
   speed: 22
   jumpHeight: 7
-  hipAimDeviation: 0.5
+  hipAimDeviation: 0.3
   sprintSpeedMultiplier: 1.75
 --- !u!114 &114359937889909712
 MonoBehaviour:

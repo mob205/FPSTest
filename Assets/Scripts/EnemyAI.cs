@@ -52,17 +52,18 @@ public class EnemyAI : MonoBehaviour {
         transform.LookAt(_player.transform.position);
         _agent.SetDestination(_player.transform.position);
     }
-    void ProcessRayHit(int damage)
+    void ProcessRayHit(float damage)
     {
         Damage(damage);
         
     }
-    void Damage(int damage)
+    void Damage(float damage)
     {
-        Debug.Log("damaged. " + _health);
+        
         isAggroed = true;
         _health -= damage;
-        if(_health <= 0)
+        Debug.Log("damaged. " + _health);
+        if (_health <= 0)
         {
             InitiateDeathSequence();
         }
