@@ -168,6 +168,21 @@ public class PlayerController : MonoBehaviour {
     {
         Damage(damage);
     }
-   
+    public void AddBuff(Buff buff)
+    {
+        var buffStrength = buff.buffStrength;
+        switch (buff.buffType)
+        {
+            case Buff.BuffType.Damage:
+                gun.ModifyDamage(buffStrength);
+                break;
+            case Buff.BuffType.Speed:
+                speed += speed * (buffStrength / 100);
+                break;
+            case Buff.BuffType.Health:
+                Heal(buffStrength);
+                break;
+        }
+    }
     
 }
