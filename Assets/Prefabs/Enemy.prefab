@@ -408,7 +408,7 @@ MonoBehaviour:
   aimDeviation: 0.1
   magSize: 30
   reloadTime: 1
-  damage: 5
+  baseDamage: 5
 --- !u!114 &114383869389875868
 MonoBehaviour:
   m_ObjectHideFlags: 1

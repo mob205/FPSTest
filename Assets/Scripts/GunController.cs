@@ -16,9 +16,9 @@ public class GunController : MonoBehaviour {
     [SerializeField] public float aimDeviation = 0.5F;
     [SerializeField] public int magSize = 30;
     [SerializeField] float reloadTime;
-    [SerializeField] float damage = 5;
+    [SerializeField] float baseDamage = 5;
 
-
+    public float damage;
     bool isReloading;
     bool canFire = true;
     private int _ammoCount;
@@ -26,11 +26,13 @@ public class GunController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        damage = baseDamage; 
         _ammoCount = magSize;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
     }
     public int GetAmmoCount()
     {
@@ -49,7 +51,7 @@ public class GunController : MonoBehaviour {
     }
     public void ModifyDamage(float damageModifier)
     {
-        damage += damage * (damageModifier / 100);
+        damage = baseDamage * damageModifier;
     }
     private void ToggleFire()
     {

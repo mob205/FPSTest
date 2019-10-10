@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33477212490136632}
   - component: {fileID: 23313708026916940}
   - component: {fileID: 95037230460466594}
-  - component: {fileID: 114698483262200490}
   - component: {fileID: 65540198244662670}
+  - component: {fileID: 114999933220358476}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033474418937556}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 93.3, y: 3.28, z: -47.44188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -114,7 +114,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114698483262200490
+--- !u!114 &114999933220358476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,7 +122,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1033474418937556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a22557725ec1b468e892d154393ccb, type: 3}
+  m_Script: {fileID: 11500000, guid: 55a89e7e68a88364281be2730a9e929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 50
+  buffType: 2
+  buffStrength: 50

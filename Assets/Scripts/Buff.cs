@@ -26,8 +26,7 @@ public class Buff : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        _player.AddBuff(this);
-        Debug.Log(string.Format("Buff applied! Buff type: {0} Buff modifier: {1}", buffType, buffStrength));
+        _player.UpdateBuffs(buffType, buffStrength);
         Destroy(gameObject);
     }
 

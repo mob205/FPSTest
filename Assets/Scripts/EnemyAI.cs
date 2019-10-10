@@ -62,7 +62,6 @@ public class EnemyAI : MonoBehaviour {
         
         isAggroed = true;
         _health -= damage;
-        Debug.Log("damaged. " + _health);
         if (_health <= 0)
         {
             InitiateDeathSequence();

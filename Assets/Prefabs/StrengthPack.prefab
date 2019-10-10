@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23788424263737676}
   - component: {fileID: 95065756424619340}
   - component: {fileID: 65746564617525666}
-  - component: {fileID: 114045284886262848}
+  - component: {fileID: 114957318122496866}
   m_Layer: 0
   m_Name: StrengthPack
   m_TagString: Untagged
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1361726426516796}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -140.57, y: 5.44, z: 38.467613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -140.46, y: 5.44, z: 38.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,7 +114,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114045284886262848
+--- !u!114 &114957318122496866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,7 +122,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361726426516796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b558d5be74bd045b555abbfd80a64f, type: 3}
+  m_Script: {fileID: 11500000, guid: 55a89e7e68a88364281be2730a9e929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageModifier: 25
+  buffType: 0
+  buffStrength: 50

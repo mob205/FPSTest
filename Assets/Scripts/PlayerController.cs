@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] Transform ADSLocation;
     [SerializeField] Transform hipLocation;
     [SerializeField] TextMeshProUGUI ammoDisplay;
+    [SerializeField] TextMeshProUGUI buffsDisplay;
     [SerializeField] Slider healthDisplay;
     [SerializeField] Slider staminaDisplay;
     [Header("Stats")]
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     bool isGrounded;
     bool isSprinting;
     Rigidbody rb;
+    public IDictionary<Buff.BuffType, float> buffList = new Dictionary<Buff.BuffType, float>();
 	// Use this for initialization
 	void Start () {
         gun = GetComponentInChildren<GunController>();
@@ -69,6 +71,50 @@ public class PlayerController : MonoBehaviour {
     private void UpdateStaminaDisplay()
     {
         staminaDisplay.value = (float)stamina / (float)maxStamina;
+    }
+    public void UpdateBuffs(Buff.BuffType buffType, int intBuffStrength)
+    {
+        if(buffType == Buff.BuffType.Health)
+        {
+            Heal(intBuffStrength);
+            return;
+        }
+
+        float buffStrength = intBuffStrength;
+        if(buffList.ContainsKey(buffType))
+        {
+            buffList[buffType] += (buffStrength / 100);
+            Debug.Log("Existing buff of same type found. Adding values " + buffList[buffType].ToString());
+
+        }
+        else
+        {
+            Debug.Log("New buff detected. Added key to dictionary.");
+            buffList.Add(buffType, (buffStrength / 100) + 1);
+            Debug.Log(buffList[buffType]);
+        }
+        switch (buffType)
+        {
+            case Buff.BuffType.Damage:
+                
+                gun.ModifyDamage(buffList[buffType]);
+                break;
+            case Buff.BuffType.Speed:
+                //increase speed by percent
+                break;
+        }
+        Debug.Log(buffList);
+        UpdateBuffsDisplay();
+    }
+    void UpdateBuffsDisplay()
+    {
+        string display = "";
+        foreach (KeyValuePair<Buff.BuffType, float> values in buffList)
+        {
+            display += values.Key.ToString() + ": " + values.Value + "x\n";
+        }
+        Debug.Log(display);
+        buffsDisplay.text = display;
     }
     void ProcessGunInput()
     {
@@ -168,21 +214,4 @@ public class PlayerController : MonoBehaviour {
     {
         Damage(damage);
     }
-    public void AddBuff(Buff buff)
-    {
-        var buffStrength = buff.buffStrength;
-        switch (buff.buffType)
-        {
-            case Buff.BuffType.Damage:
-                gun.ModifyDamage(buffStrength);
-                break;
-            case Buff.BuffType.Speed:
-                speed += speed * (buffStrength / 100);
-                break;
-            case Buff.BuffType.Health:
-                Heal(buffStrength);
-                break;
-        }
-    }
-    
 }
