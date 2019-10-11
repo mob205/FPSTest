@@ -494,13 +494,14 @@ MonoBehaviour:
   ADSLocation: {fileID: 4844384236982132}
   hipLocation: {fileID: 4165767317599418}
   ammoDisplay: {fileID: 0}
+  buffsDisplay: {fileID: 0}
   healthDisplay: {fileID: 0}
   staminaDisplay: {fileID: 0}
   maxStamina: 100
   maxHealth: 100
   staminaUsage: 25
   staminaRegen: 20
-  speed: 22
+  baseSpeed: 15
   jumpHeight: 7
   hipAimDeviation: 0.3
   sprintSpeedMultiplier: 1.75
@@ -522,6 +523,7 @@ MonoBehaviour:
   aimDeviation: 0
   magSize: 30
   reloadTime: 1
+  baseDamage: 5
   damage: 5
 --- !u!114 &114442910818032496
 MonoBehaviour:

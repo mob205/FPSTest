@@ -101,6 +101,7 @@ public class GunController : MonoBehaviour {
         yield return new WaitForSeconds(reloadTime);
         if (!hasFiredSinceReload)
         {
+            //Pump-shotgun reload idea: If pump-reload is selected, add 1 to ammo counter and repeat coroutine if not full. 
             _ammoCount = magSize;
             Debug.Log("Reload successful.");
         }

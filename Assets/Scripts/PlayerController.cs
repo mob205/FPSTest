@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] int maxHealth = 100;
     [SerializeField] int staminaUsage = 25;
     [SerializeField] int staminaRegen = 15;
-    [SerializeField] float speed = 10f;
+    [SerializeField] float baseSpeed = 10f;
     [SerializeField] float jumpHeight = 10f;
     [SerializeField] float hipAimDeviation = 0.1f;
     [SerializeField] float sprintSpeedMultiplier = 2f;
 
+    float speed;
     float stamina;
     float health;
     GunController gun;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
         stamina = maxStamina;
+        speed = baseSpeed;
 	}
  
     // Update is called once per frame
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour {
                 gun.ModifyDamage(buffList[buffType]);
                 break;
             case Buff.BuffType.Speed:
-                //increase speed by percent
+                speed = baseSpeed * buffList[buffType];
                 break;
         }
         Debug.Log(buffList);
