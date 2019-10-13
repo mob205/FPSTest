@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gun.StartCoroutine("Reload");
+            gun.StartReload();
         }
     }
     void Damage(int damage)

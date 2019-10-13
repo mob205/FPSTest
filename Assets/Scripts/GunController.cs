@@ -23,6 +23,7 @@ public class GunController : MonoBehaviour {
     bool canFire = true;
     private int _ammoCount;
     bool hasFiredSinceReload = false;
+    Coroutine reloadCoroutine;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +43,7 @@ public class GunController : MonoBehaviour {
     {
         if(!canFire) { return; }
         if (_ammoCount <= 0) { return; }
-        hasFiredSinceReload = true;
+        if(isReloading) { CancelReload(); }
         ShootRay();
         FireParticles();
         PlayShootSound();
@@ -90,8 +91,18 @@ public class GunController : MonoBehaviour {
         _ammoCount--;
         if(_ammoCount <= 0)
         {
-            StartCoroutine("Reload");
+            StartReload();
+            
         }
+    }
+    public void StartReload()
+    {
+        reloadCoroutine = StartCoroutine("Reload");
+    }
+    private void CancelReload()
+    {
+        StopCoroutine(reloadCoroutine);
+        isReloading = false;
     }
     public IEnumerator Reload()
     {
@@ -99,16 +110,9 @@ public class GunController : MonoBehaviour {
         hasFiredSinceReload = false;
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        if (!hasFiredSinceReload)
-        {
-            //Pump-shotgun reload idea: If pump-reload is selected, add 1 to ammo counter and repeat coroutine if not full. 
-            _ammoCount = magSize;
-            Debug.Log("Reload successful.");
-        }
-        else
-        {
-            Debug.Log("Reload not successful.");
-        }
+        //Pump-shotgun reload idea: If pump-reload is selected, add 1 to ammo counter and repeat coroutine if not full. 
+        _ammoCount = magSize;
+        Debug.Log("Reload successful.");
         isReloading = false;
     }
     IEnumerator EnableFire()
