@@ -13,22 +13,24 @@ public class GunController : MonoBehaviour {
 
     [Header("Gun Stats")]
     [SerializeField] float timeBetweenFire = 0.5f;
-    [SerializeField] public float aimDeviation = 0.5F;
+    [SerializeField] public float baseAimDeviation = 0.5F;
     [SerializeField] public int magSize = 30;
-    [SerializeField] float reloadTime;
+    [SerializeField] protected float reloadTime;
     [SerializeField] float baseDamage = 5;
+    [SerializeField] int bulletsPerShot = 1;
+    [SerializeField] public float aimDeviation;
 
     public float damage;
-    bool isReloading;
+    protected bool isReloading;
     bool canFire = true;
-    private int _ammoCount;
-    bool hasFiredSinceReload = false;
+    protected int _ammoCount;
     Coroutine reloadCoroutine;
 
 	// Use this for initialization
 	void Start () {
         damage = baseDamage; 
         _ammoCount = magSize;
+        aimDeviation = baseAimDeviation;
 	}
 	
 	// Update is called once per frame
@@ -44,11 +46,14 @@ public class GunController : MonoBehaviour {
         if(!canFire) { return; }
         if (_ammoCount <= 0) { return; }
         if(isReloading) { CancelReload(); }
-        ShootRay();
         FireParticles();
         PlayShootSound();
         ToggleFire();
         ConsumeAmmo();
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            ShootRay();
+        }
     }
     public void ModifyDamage(float damageModifier)
     {
@@ -104,15 +109,12 @@ public class GunController : MonoBehaviour {
         StopCoroutine(reloadCoroutine);
         isReloading = false;
     }
-    public IEnumerator Reload()
+    public virtual IEnumerator Reload()
     {
-        Debug.Log("Reloading");
-        hasFiredSinceReload = false;
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         //Pump-shotgun reload idea: If pump-reload is selected, add 1 to ammo counter and repeat coroutine if not full. 
         _ammoCount = magSize;
-        Debug.Log("Reload successful.");
         isReloading = false;
     }
     IEnumerator EnableFire()

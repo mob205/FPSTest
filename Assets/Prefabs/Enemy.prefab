@@ -149,8 +149,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205153988513346}
-  m_LocalRotation: {x: -0, y: -0.6628709, z: -0, w: 0.74873376}
-  m_LocalPosition: {x: 76.86, y: 9.53, z: -14.814895}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -95.01, y: 8.04, z: 44.5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4695455105174982}
@@ -405,10 +405,13 @@ MonoBehaviour:
   gunAudio: {fileID: 82404235887532192}
   rayTransform: {fileID: 4199573631828540}
   timeBetweenFire: 0.1
-  aimDeviation: 0.1
+  baseAimDeviation: 0.2
   magSize: 30
   reloadTime: 1
   baseDamage: 5
+  bulletsPerShot: 1
+  aimDeviation: 0.1
+  damage: 0
 --- !u!114 &114383869389875868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -551,7 +554,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -150671569
+  randomSeed: -316403842
   InitialModule:
     serializedVersion: 3
     enabled: 1

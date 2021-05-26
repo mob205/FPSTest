@@ -284,12 +284,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunFire: {fileID: 198418606534884402}
-  gunAudio: {fileID: 0}
+  gunAudio: {fileID: 82433456635359824, guid: 73cd2a8d135eccf43b4faa9a5431bc00, type: 2}
   rayTransform: {fileID: 0}
   timeBetweenFire: 0.75
-  aimDeviation: 0.2
+  baseAimDeviation: 0.3
   magSize: 7
   reloadTime: 0.75
+  baseDamage: 10
+  bulletsPerShot: 1
+  aimDeviation: 0.2
   damage: 15
 --- !u!198 &198418606534884402
 ParticleSystem:

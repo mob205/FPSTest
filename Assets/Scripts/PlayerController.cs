@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] int staminaRegen = 15;
     [SerializeField] float baseSpeed = 10f;
     [SerializeField] float jumpHeight = 10f;
-    [SerializeField] float hipAimDeviation = 0.1f;
+    [SerializeField] float hipAimModifier = 1f;
+    [SerializeField] float ADSModifier = 0.5f;
     [SerializeField] float sprintSpeedMultiplier = 2f;
 
     float speed;
@@ -157,13 +158,13 @@ public class PlayerController : MonoBehaviour {
         {
             gun.transform.position = ADSLocation.transform.position;
             gun.transform.rotation = ADSLocation.transform.rotation;
-            gun.aimDeviation = 0f;
+            gun.aimDeviation = ADSModifier * gun.baseAimDeviation;
         }
         else
         {
             gun.transform.position = hipLocation.transform.position;
             gun.transform.rotation = hipLocation.transform.rotation;
-            gun.aimDeviation = hipAimDeviation;
+            gun.aimDeviation = hipAimModifier * gun.baseAimDeviation;
         }
     }
 
