@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 136532450983944808}
   - component: {fileID: 23949683431724644}
   - component: {fileID: 114696751651746732}
+  - component: {fileID: 114855069731700374}
   - component: {fileID: 114101939814972688}
   - component: {fileID: 54215624703209278}
   m_Layer: 9
@@ -341,8 +342,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102838684239246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2219381, y: -2.0619097, z: 4.3688307}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4771855502974632}
@@ -453,15 +454,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636712346450458}
-  m_LocalRotation: {x: -6.9849193e-10, y: 0.6849561, z: 0.0000000016298145, w: 0.7285844}
-  m_LocalPosition: {x: 0.94, y: -1.86, z: 2.76}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4302950461954810}
   - {fileID: 4302488681492756}
   m_Father: {fileID: 4225798848711630}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 86.464005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4800451041023030
 Transform:
   m_ObjectHideFlags: 1
@@ -1069,7 +1070,7 @@ MonoBehaviour:
   gunAudio: {fileID: 82165460548073142}
   rayTransform: {fileID: 4339799528760644}
   timeBetweenFire: 0.1
-  baseAimDeviation: 0.1
+  baseAimDeviation: 0.2
   magSize: 30
   reloadTime: 1
   baseDamage: 5
@@ -1122,6 +1123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852cf7191369c344b0f7df97caa08dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114855069731700374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683826588129482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7e0fe143582d6428c716499930e6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns: []
 --- !u!124 &124120674580306416
 Behaviour:
   m_ObjectHideFlags: 1

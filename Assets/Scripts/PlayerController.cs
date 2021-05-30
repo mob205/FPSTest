@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        ReassignGun();
         ProcessGunInput();
         ResetRotation();
         AimDownSights();
@@ -54,11 +55,19 @@ public class PlayerController : MonoBehaviour {
         UpdateStaminaDisplay();
         ProcessSprint();
     }
+   
     private void FixedUpdate()
     {
         Jump();
         ProcessMovement();
         LimitVelocity();
+    }
+    private void ReassignGun()
+    {
+        if (!gun.isActiveAndEnabled)
+        {
+            gun = GetComponentInChildren<GunController>();
+        }
     }
     private void UpdateAmmoDisplay()
     {

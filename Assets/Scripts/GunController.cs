@@ -32,10 +32,13 @@ public class GunController : MonoBehaviour {
         _ammoCount = magSize;
         aimDeviation = baseAimDeviation;
 	}
-	
+	void OnEnable()
+    {
+        canFire = true;
+    }
 	// Update is called once per frame
 	void Update () {
-
+        Debug.Log(canFire);
     }
     public int GetAmmoCount()
     {
